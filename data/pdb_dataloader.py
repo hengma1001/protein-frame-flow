@@ -1,19 +1,18 @@
 """PDB data loader."""
+import logging
 import math
+
+import numpy as np
+import pandas as pd
 import torch
 import tree
-import numpy as np
-import torch
-import pandas as pd
-import logging
+from pytorch_lightning import LightningDataModule
+from torch.utils.data import DataLoader, Dataset
+from torch.utils.data.distributed import DistributedSampler, dist
 
 from data import utils as du
 from openfold.data import data_transforms
 from openfold.utils import rigid_utils
-
-from pytorch_lightning import LightningDataModule
-from torch.utils.data import DataLoader, Dataset
-from torch.utils.data.distributed import DistributedSampler, dist
 
 
 class PdbDataModule(LightningDataModule):

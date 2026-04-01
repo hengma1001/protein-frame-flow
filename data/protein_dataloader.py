@@ -1,7 +1,8 @@
 """Protein data loader."""
-import math
-import torch
 import logging
+import math
+
+import torch
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader
 from torch.utils.data.distributed import DistributedSampler, dist
@@ -91,6 +92,7 @@ class LengthBatcher:
         self.shuffle = shuffle
         self.epoch = 0
         self.max_batch_size =  self._sampler_cfg.max_batch_size
+        self._create_batches()
         self._log.info(f'Created dataloader rank {self.rank+1} out of {self.num_replicas}')
 
     def _sample_indices(self):
